@@ -340,7 +340,7 @@
     _videoFrame.format.estimatedFramesPerSecond =
     _minFrameDuration.timescale / _minFrameDuration.value;
     _videoFrame.format.estimatedCaptureDelay = 100;
-    _videoFrame.orientation = OTVideoOrientationUp;
+    _videoFrame.orientation = OTVideoOrientationDown;
     
     [_videoFrame clearPlanes];
     [_videoFrame.planes addPointer:CVPixelBufferGetBaseAddress(ref)];
