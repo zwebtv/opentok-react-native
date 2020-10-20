@@ -91,6 +91,7 @@ class OTSessionManager: RCTEventEmitter {
                 publisher.videoCapture = OTScreenCapture(view: (screenView))
             } else if let cameraPosition = properties["cameraPosition"] as? String {
                 publisher.cameraPosition = cameraPosition == "front" ? .front : .back;
+                publisher.videoCapture = OTCustomCapture(orientation: (orientation));
             }
             publisher.audioFallbackEnabled = Utils.sanitizeBooleanProperty(properties["audioFallbackEnabled"] as Any);
             publisher.publishAudio = Utils.sanitizeBooleanProperty(properties["publishAudio"] as Any);
