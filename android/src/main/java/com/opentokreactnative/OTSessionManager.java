@@ -131,7 +131,7 @@ public class OTSessionManager extends ReactContextBaseJavaModule
     }
 
     @ReactMethod
-    public void initPublisher(String publisherId, ReadableMap properties, Callback callback) {
+    public void initPublisher(String publisherId, ReadableMap properties, Callback callback, String orientation) {
 
         String name = properties.getString("name");
         Boolean videoTrack = properties.getBoolean("videoTrack");
@@ -159,6 +159,8 @@ public class OTSessionManager extends ReactContextBaseJavaModule
                     .build();
             mPublisher.setPublisherVideoType(PublisherKit.PublisherKitVideoType.PublisherKitVideoTypeScreen);
         } else {
+            View view = getCurrentActivity().getWindow().getDecorView().getRootView();
+            OTCustomCapturer capturer = new OTCustomCapturer(view, orientation);
             mPublisher = new Publisher.Builder(this.getReactApplicationContext())
                     .audioTrack(audioTrack)
                     .videoTrack(videoTrack)
@@ -166,6 +168,7 @@ public class OTSessionManager extends ReactContextBaseJavaModule
                     .audioBitrate(audioBitrate)
                     .resolution(Publisher.CameraCaptureResolution.valueOf(resolution))
                     .frameRate(Publisher.CameraCaptureFrameRate.valueOf(frameRate))
+                    .capturer(capturer)
                     .build();
             if (cameraPosition.equals("back")) {
                 mPublisher.cycleCamera();
