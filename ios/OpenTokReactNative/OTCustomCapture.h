@@ -38,4 +38,6 @@
 
 @property (nonatomic, retain) id<TBFrameCapturerMetadataDelegate> delegate;
 
+@property(readonly) String videoOrientation;
+
 @end

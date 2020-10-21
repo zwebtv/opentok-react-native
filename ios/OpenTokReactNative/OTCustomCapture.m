@@ -53,6 +53,7 @@ typedef NS_ENUM(int32_t, OTCapturerErrorCode) {
     uint32_t _captureWidth;
     uint32_t _captureHeight;
     NSString* _capturePreset;
+    NSString* _videoOrientation;
     
     AVCaptureSession *_captureSession;
     AVCaptureDeviceInput *_videoInput;
@@ -67,6 +68,7 @@ typedef NS_ENUM(int32_t, OTCapturerErrorCode) {
     enum OTCapturerErrorCode _captureErrorCode;
     
     BOOL isFirstFrame;
+    
 }
 
 @synthesize captureSession = _captureSession;
@@ -652,38 +654,36 @@ typedef NS_ENUM(int32_t, OTCapturerErrorCode) {
 
 - (OTVideoOrientation)currentDeviceOrientation {
     // transforms are different for
-    if (AVCaptureDevicePositionFront == self.cameraPosition)
-    {
-        switch (self.currentStatusBarOrientation) {
-            case UIInterfaceOrientationLandscapeLeft:
-                return OTVideoOrientationUp;
-            case UIInterfaceOrientationLandscapeRight:
+//    if (AVCaptureDevicePositionFront == self.cameraPosition)
+//    {
+//        switch (self.currentStatusBarOrientation) {
+//            case UIInterfaceOrientationLandscapeLeft:
+//                return OTVideoOrientationUp;
+//            case UIInterfaceOrientationLandscapeRight:
+//                return OTVideoOrientationDown;
+//            case UIInterfaceOrientationPortrait:
+//                return OTVideoOrientationLeft;
+//            case UIInterfaceOrientationPortraitUpsideDown:
+//                return OTVideoOrientationRight;
+//            case UIInterfaceOrientationUnknown:
+//                return OTVideoOrientationUp;
+//        }
+//    }
+//    else
+//    {
+        switch (self.videoOrientation) {
+            case "down":
                 return OTVideoOrientationDown;
-            case UIInterfaceOrientationPortrait:
+            case "up":
+                return OTVideoOrientationUp;
+            case "left":
                 return OTVideoOrientationLeft;
-            case UIInterfaceOrientationPortraitUpsideDown:
+            case "right":
                 return OTVideoOrientationRight;
-            case UIInterfaceOrientationUnknown:
-                return OTVideoOrientationUp;
         }
-    }
-    else
-    {
-        switch (self.currentStatusBarOrientation) {
-            case UIInterfaceOrientationLandscapeLeft:
-                return OTVideoOrientationDown;
-            case UIInterfaceOrientationLandscapeRight:
-                return OTVideoOrientationUp;
-            case UIInterfaceOrientationPortrait:
-                return OTVideoOrientationLeft;
-            case UIInterfaceOrientationPortraitUpsideDown:
-                return OTVideoOrientationRight;
-            case UIInterfaceOrientationUnknown:
-                return OTVideoOrientationUp;
-        }
-    }
+//    }
     
-    return OTVideoOrientationUp;
+    return OTVideoOrientationDown;
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput

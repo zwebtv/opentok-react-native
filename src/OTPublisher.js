@@ -91,7 +91,7 @@ class OTPublisher extends Component {
   }
   initPublisher() {
     const publisherProperties = sanitizeProperties(this.props.properties);
-    OT.initPublisher(this.state.publisherId, publisherProperties, (initError) => {
+    OT.initPublisher(this.state.publisherId, publisherProperties, this.props.orientation, (initError) => {
       if (initError) {
         this.setState({
           initError
