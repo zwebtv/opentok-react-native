@@ -1,16 +1,41 @@
 //
-//  OTKBasicVideoCapturer.h
-//  Getting Started
+//  OTCustomCapture.h
+//  OpenTok iOS SDK
 //
-//  Created by rpc on 03/03/15.
-//  Copyright (c) 2015 OpenTok. All rights reserved.
+//  Copyright (c) 2013 Tokbox, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 #import <OpenTok/OpenTok.h>
 
-@interface OTCustomCapture : NSObject<OTVideoCapture>
+@protocol OTVideoCapture;
 
-- (id)initWithPreset:(NSString *)preset andDesiredFrameRate:(NSUInteger)frameRate;
+@protocol TBFrameCapturerMetadataDelegate <NSObject>
+- (void)finishPreparingFrame:(OTVideoFrame *)videoFrame;
 @end
 
+@interface OTCustomCapture : NSObject
+    <AVCaptureVideoDataOutputSampleBufferDelegate, OTVideoCapture>
+{
+    @protected
+    dispatch_queue_t _capture_queue;
+}
+
+@property (nonatomic, retain) AVCaptureSession *captureSession;
+@property (nonatomic, retain) AVCaptureVideoDataOutput *videoOutput;
+@property (nonatomic, retain) AVCaptureDeviceInput *videoInput;
+
+@property (nonatomic, assign) NSString* captureSessionPreset;
+@property (readonly) NSArray* availableCaptureSessionPresets;
+
+@property (nonatomic, assign) double activeFrameRate;
+- (BOOL)isAvailableActiveFrameRate:(double)frameRate;
+
+@property (nonatomic, assign) AVCaptureDevicePosition cameraPosition;
+@property (readonly) NSArray* availableCameraPositions;
+- (BOOL)toggleCameraPosition;
+
+@property (nonatomic, retain) id<TBFrameCapturerMetadataDelegate> delegate;
+
+@end
