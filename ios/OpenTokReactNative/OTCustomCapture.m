@@ -24,7 +24,7 @@
 - (double)bestFrameRateForDevice;
 @end
 
-@implementation OTCustomCapture 
+@implementation OTCustomCapture
 @synthesize videoCaptureConsumer;
 
 - (id)initWithPreset:(NSString *)preset andDesiredFrameRate:(NSUInteger)frameRate

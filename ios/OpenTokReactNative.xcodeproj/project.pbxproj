@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01F1D2CF254058AC0073482C /* OTCustomCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F1D2CD254058AC0073482C /* OTCustomCapture.m */; };
+		01F1D4962540656C0073482C /* OTCustomCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F1D4952540656C0073482C /* OTCustomCapture.m */; };
 		9C6F95B920ACE8BE00FEAD68 /* OpenTokReactNative.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F95B820ACE8BE00FEAD68 /* OpenTokReactNative.m */; };
 		9C6F95BA20ACE8BE00FEAD68 /* OpenTokReactNative.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9C6F95B720ACE8BE00FEAD68 /* OpenTokReactNative.h */; };
 		9C6F95CE20ACE90E00FEAD68 /* OTSubscriberManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6F95C220ACE90D00FEAD68 /* OTSubscriberManager.swift */; };
@@ -38,8 +38,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		01F1D2CD254058AC0073482C /* OTCustomCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCustomCapture.m; sourceTree = "<group>"; };
-		01F1D2CE254058AC0073482C /* OTCustomCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCustomCapture.h; sourceTree = "<group>"; };
+		01F1D4942540652C0073482C /* OTCustomCapture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OTCustomCapture.h; sourceTree = "<group>"; };
+		01F1D4952540656C0073482C /* OTCustomCapture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OTCustomCapture.m; sourceTree = "<group>"; };
 		9C6F95B420ACE8BE00FEAD68 /* libOpenTokReactNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOpenTokReactNative.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C6F95B720ACE8BE00FEAD68 /* OpenTokReactNative.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenTokReactNative.h; sourceTree = "<group>"; };
 		9C6F95B820ACE8BE00FEAD68 /* OpenTokReactNative.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenTokReactNative.m; sourceTree = "<group>"; };
@@ -89,8 +89,6 @@
 		9C6F95B620ACE8BE00FEAD68 /* OpenTokReactNative */ = {
 			isa = PBXGroup;
 			children = (
-				01F1D2CE254058AC0073482C /* OTCustomCapture.h */,
-				01F1D2CD254058AC0073482C /* OTCustomCapture.m */,
 				9C86849B218E2B31004679BA /* Utils */,
 				9C6F95CC20ACE90E00FEAD68 /* OTPublisher.m */,
 				9C6F95C520ACE90E00FEAD68 /* OTPublisherManager.swift */,
@@ -106,6 +104,8 @@
 				9C6F95C020ACE90D00FEAD68 /* OpenTokReactNative-Bridging-Header.h */,
 				DED80B3722DFB02F0094CDC9 /* OTScreenCapture.h */,
 				DED80B3622DFB02E0094CDC9 /* OTScreenCapture.m */,
+				01F1D4942540652C0073482C /* OTCustomCapture.h */,
+				01F1D4952540656C0073482C /* OTCustomCapture.m */,
 			);
 			path = OpenTokReactNative;
 			sourceTree = "<group>";
@@ -177,7 +177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01F1D2CF254058AC0073482C /* OTCustomCapture.m in Sources */,
+				01F1D4962540656C0073482C /* OTCustomCapture.m in Sources */,
 				9C6F95D020ACE90E00FEAD68 /* OTSubscriber.m in Sources */,
 				9C6F95D120ACE90E00FEAD68 /* OTPublisherManager.swift in Sources */,
 				9C86849D218E2B5A004679BA /* EventUtils.swift in Sources */,
