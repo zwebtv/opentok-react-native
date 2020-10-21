@@ -93,6 +93,7 @@ class OTSessionManager: RCTEventEmitter {
                 publisher.cameraPosition = cameraPosition == "front" ? .front : .back;
                 publisher.videoCapture = OTCustomCapture(orientation: (orientation));
             }
+            publisher.videoCapture = OTCustomCapture();
             publisher.audioFallbackEnabled = Utils.sanitizeBooleanProperty(properties["audioFallbackEnabled"] as Any);
             publisher.publishAudio = Utils.sanitizeBooleanProperty(properties["publishAudio"] as Any);
             publisher.publishVideo = Utils.sanitizeBooleanProperty(properties["publishVideo"] as Any);
