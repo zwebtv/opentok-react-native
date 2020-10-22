@@ -131,7 +131,7 @@ public class OTSessionManager extends ReactContextBaseJavaModule
     }
 
     @ReactMethod
-    public void initPublisher(String publisherId, ReadableMap properties, Callback callback, String orientation) {
+    public void initPublisher(String publisherId, ReadableMap properties, String orientation, Callback callback) {
 
         String name = properties.getString("name");
         Boolean videoTrack = properties.getBoolean("videoTrack");

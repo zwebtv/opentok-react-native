@@ -23,6 +23,7 @@ public class OTCustomCapture extends BaseVideoCapturer implements
     private final static String LOGTAG = "customer-video-capturer";
 
     private int mCameraIndex = 0;
+    private String orientation = null;
     private Camera mCamera;
     private Camera.CameraInfo mCurrentDeviceInfo = null;
     public ReentrantLock mPreviewBufferLock = new ReentrantLock(); // sync
@@ -47,16 +48,11 @@ public class OTCustomCapture extends BaseVideoCapturer implements
     private Display mCurrentDisplay;
     private SurfaceTexture mSurfaceTexture;
 
-    public OTCustomCapture(Context context) {
+    public OTCustomCapture(String orientation) {
 
         // Initialize front camera by default
         this.mCameraIndex = getFrontCameraIndex();
-
-        // Get current display to query UI orientation
-        WindowManager windowManager = (WindowManager) context
-                .getSystemService(Context.WINDOW_SERVICE);
-        mCurrentDisplay = windowManager.getDefaultDisplay();
-
+        this.orientation = orientation;
     }
 
     @Override
@@ -224,10 +220,10 @@ public class OTCustomCapture extends BaseVideoCapturer implements
     /*
      * Set current camera orientation
      */
-    private int videoOrientation(String orientation) {
+    private int videoOrientation() {
 
         int cameraRotation = 0;
-        switch (orientation) {
+        switch (this.orientation) {
             case ("up"):
                 cameraRotation = 0;
                 break;
@@ -314,7 +310,7 @@ public class OTCustomCapture extends BaseVideoCapturer implements
             if (data.length == mExpectedFrameSize) {
                 // Send frame to OpenTok
                 provideByteArrayFrame(data, NV21, mCaptureWidth,
-                        mCaptureHeight, videoOrientation, isFrontCamera());
+                        mCaptureHeight, videoOrientation(), isFrontCamera());
 
                 // Reuse the video buffer
                 camera.addCallbackBuffer(data);
