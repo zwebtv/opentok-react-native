@@ -37,7 +37,8 @@
 - (BOOL)toggleCameraPosition;
 
 @property (nonatomic, retain) id<TBFrameCapturerMetadataDelegate> delegate;
-
-@property(readonly) String videoOrientation;
+ 
+@property(nonatomic, retain) NSString* videoOrientation;
+- (instancetype)initWithOrientation:(NSString *)orientation;
 
 @end

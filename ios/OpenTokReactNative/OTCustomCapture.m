@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "OTCustomCapture.h"
 #import <CoreVideo/CoreVideo.h>
-#import "AppDelegate.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v) \
 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
@@ -98,6 +97,14 @@ typedef NS_ENUM(int32_t, OTCapturerErrorCode) {
          selector:@selector(statusBarOrientationChange:)
          name:UIApplicationWillChangeStatusBarOrientationNotification object:nil];
     }
+    return self;
+}
+
+- (instancetype)initWithOrientation:(NSString *)orientation {
+    if (self = [self init]) {
+        _videoOrientation = orientation;
+    }
+    
     return self;
 }
 
@@ -671,16 +678,16 @@ typedef NS_ENUM(int32_t, OTCapturerErrorCode) {
 //    }
 //    else
 //    {
-        switch (self.videoOrientation) {
-            case "down":
-                return OTVideoOrientationDown;
-            case "up":
-                return OTVideoOrientationUp;
-            case "left":
-                return OTVideoOrientationLeft;
-            case "right":
-                return OTVideoOrientationRight;
-        }
+    
+    if ([_videoOrientation isEqualToString:@"down"]) {
+    return OTVideoOrientationDown;
+    } else if ([_videoOrientation isEqualToString:@"up"]) {
+    return OTVideoOrientationUp;
+    } else if ([_videoOrientation isEqualToString:@"left"]) {
+    return OTVideoOrientationLeft;
+    } else if ([_videoOrientation isEqualToString:@"right"]) {
+    return OTVideoOrientationRight;
+    }
 //    }
     
     return OTVideoOrientationDown;

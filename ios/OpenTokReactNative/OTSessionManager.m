@@ -24,7 +24,7 @@ RCT_EXTERN_METHOD(connect:
 RCT_EXTERN_METHOD(initPublisher:
                   (NSString*)publisherId
                   properties:(NSDictionary*)properties
-                  (NSString*)orientation
+                  orientation:(NSString*)orientation
                   callback:(RCTResponseSenderBlock*)callback)
 RCT_EXTERN_METHOD(publish:
                   (NSString*)sessionId
