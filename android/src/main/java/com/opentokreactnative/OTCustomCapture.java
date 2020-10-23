@@ -319,13 +319,13 @@ public class OTCustomCapture extends BaseVideoCapturer implements
 
         int cameraRotation = 0;
         switch (this.orientation) {
-            case ("up"):
+            case ("down"):
                 cameraRotation = 0;
                 break;
             case ("left"):
                 cameraRotation = 270;
                 break;
-            case ("down"):
+            case ("up"):
                 cameraRotation = 180;
                 break;
             case ("right"):
