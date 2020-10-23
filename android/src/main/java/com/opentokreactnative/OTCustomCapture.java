@@ -1,4 +1,4 @@
-package com.opentok.android.demo.video;
+package com.opentokreactnative;
 /*from www . j av a 2 s.c  om*/
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
