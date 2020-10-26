@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b34038e2-f434-4ad9-8048-5958f3d8a4f7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/opentokreactnative/OTCustomCapture.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/opentokreactnative/OTCustomCapture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/opentokreactnative/OTSessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/opentokreactnative/OTSessionManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
