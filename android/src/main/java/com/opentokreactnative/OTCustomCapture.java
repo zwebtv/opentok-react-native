@@ -473,6 +473,7 @@ public class OTCustomCapture extends BaseVideoCapturer implements
 
         } catch (RuntimeException exp) {
             Log.e(LOG_TAG, "Error configuring capture size");
+            return;
         }
 
         int maxw = 0;
