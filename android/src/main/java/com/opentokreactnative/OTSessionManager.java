@@ -91,7 +91,7 @@ public class OTSessionManager extends ReactContextBaseJavaModule
                 .sessionOptions(new Session.SessionOptions() {
                     @Override
                     public boolean useTextureViews() {
-                        return useTextureViews;
+                        return true;
                     }
 
                     @Override
