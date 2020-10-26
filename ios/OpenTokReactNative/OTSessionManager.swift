@@ -64,7 +64,7 @@ class OTSessionManager: RCTEventEmitter {
         }
     }
     
-    @objc func initPublisher(_ publisherId: String, properties: Dictionary<String, Any>, orientation: String, callback: @escaping RCTResponseSenderBlock) -> Void {
+    @objc func initPublisher(_ publisherId: String, properties: Dictionary<String, Any>, orientation: String?, callback: @escaping RCTResponseSenderBlock) -> Void {
         DispatchQueue.main.async {
             let publisherProperties = OTPublisherSettings()
             publisherProperties.videoTrack = Utils.sanitizeBooleanProperty(properties["videoTrack"] as Any);
@@ -92,7 +92,7 @@ class OTSessionManager: RCTEventEmitter {
             } else if let cameraPosition = properties["cameraPosition"] as? String {
                 publisher.cameraPosition = cameraPosition == "front" ? .front : .back;
             }
-            if (orientation) {
+            if (orientation != nil) {
                 publisher.videoCapture = OTCustomCapture(orientation: orientation);
             }
             publisher.audioFallbackEnabled = Utils.sanitizeBooleanProperty(properties["audioFallbackEnabled"] as Any);
