@@ -35,10 +35,11 @@ public class OTSubscriberLayout extends FrameLayout{
         String zOrder = "";
         if (mSubscriber != null) {
             if (mSubscriber.getSession() != null) {
-                if (androidOnTopMap.get(mSubscriber.getSession().getSessionId()) != null) {
+                String sessionId = mSubscriber.getSession().getSessionId();
+                if (sessionId != null && androidOnTopMap.get(sessionId) != null) {
                     pubOrSub = androidOnTopMap.get(mSubscriber.getSession().getSessionId());
                 }
-                if (androidZOrderMap.get(mSubscriber.getSession().getSessionId()) != null) {
+                if (sessionId != null && androidZOrderMap.get(sessionId) != null) {
                     zOrder = androidZOrderMap.get(mSubscriber.getSession().getSessionId());
                 }
             }
