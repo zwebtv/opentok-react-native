@@ -15,6 +15,7 @@ export default class OTSubscriber extends Component {
       streams: [],
       subscribeToSelf: props.subscribeToSelf || false
     };
+    this.pendingSubscriptions = 0;
     this.componentEvents = {
       streamDestroyed: Platform.OS === 'android' ? 'session:onStreamDropped' : 'session:streamDestroyed',
       streamCreated: Platform.OS === 'android' ? 'session:onStreamReceived' : 'session:streamCreated',
@@ -61,23 +62,32 @@ export default class OTSubscriber extends Component {
     const subscriberProperties = isNull(streamProperties[stream.streamId]) ?
                                   sanitizeProperties(properties) : sanitizeProperties(streamProperties[stream.streamId]);
 
-    // experimental. stop adding
-    if(this.props.maximumStreams && streams.length >= this.props.maximumStreams) {
-      return
-    }
+    const {maximumStreams} = this.props;
 
-    // Subscribe to streams. If subscribeToSelf is true, subscribe also to his own stream
-    const sessionInfoConnectionId = sessionInfo && sessionInfo.connection ? sessionInfo.connection.connectionId : null;
-    if (subscribeToSelf || (sessionInfoConnectionId !== stream.connectionId)){
-      OT.subscribeToStream(stream.streamId, sessionId, subscriberProperties, (error) => {
-        if (error) {
-          this.otrnEventHandler(error);
-        } else {
-          this.setState({
-            streams: [...this.state.streams, stream.streamId],
-          });
-        }
-      });
+    console.log('maximumStreams: ', maximumStreams)
+    console.log('this.state.streams.length: ', this.state.streams.length)
+
+    console.log('this.pendingSubscriptions ', this.pendingSubscriptions)
+
+    if(this.props.maximumStreams && this.state.streams.length + this.pendingSubscriptions + 1 > maximumStreams) {
+      console.log('MAX STREAMS REACHED')
+    } else {
+        this.pendingSubscriptions++;
+        // Subscribe to streams. If subscribeToSelf is true, subscribe also to his own stream
+        const sessionInfoConnectionId = sessionInfo && sessionInfo.connection ? sessionInfo.connection.connectionId : null;
+        if (subscribeToSelf || (sessionInfoConnectionId !== stream.connectionId)){
+        OT.subscribeToStream(stream.streamId, sessionId, subscriberProperties, (error) => {
+          if (error) {
+            this.otrnEventHandler(error);
+          } else {
+            this.pendingSubscriptions--;
+            console.log('this.state.streams -a- ', this.state.streams)
+            this.setState({
+              streams: [...this.state.streams, stream.streamId],
+            });
+          }
+        });
+      }
     }
   }
   streamDestroyedHandler = (stream) => {
@@ -85,8 +95,9 @@ export default class OTSubscriber extends Component {
       if (error) {
         this.otrnEventHandler(error);
       } else {
+        console.log('this.state.streams ', this.state.streams)
         const indexOfStream = this.state.streams.indexOf(stream.streamId);
-        // with limit, may not be store this!
+        // with limit, may not be storing this!
         if(indexOfStream === -1) {
           return;
         }
