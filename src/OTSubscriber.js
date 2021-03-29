@@ -60,6 +60,12 @@ export default class OTSubscriber extends Component {
     const { sessionId, sessionInfo } = this.context;
     const subscriberProperties = isNull(streamProperties[stream.streamId]) ?
                                   sanitizeProperties(properties) : sanitizeProperties(streamProperties[stream.streamId]);
+
+    // experimental. stop adding
+    if(this.props.maximumStreams && streams.length >= this.props.maximumStreams) {
+      return
+    }
+
     // Subscribe to streams. If subscribeToSelf is true, subscribe also to his own stream
     const sessionInfoConnectionId = sessionInfo && sessionInfo.connection ? sessionInfo.connection.connectionId : null;
     if (subscribeToSelf || (sessionInfoConnectionId !== stream.connectionId)){
@@ -80,6 +86,10 @@ export default class OTSubscriber extends Component {
         this.otrnEventHandler(error);
       } else {
         const indexOfStream = this.state.streams.indexOf(stream.streamId);
+        // with limit, may not be store this!
+        if(indexOfStream === -1) {
+          return;
+        }
         const newState = this.state.streams.slice();
         newState.splice(indexOfStream, 1);
         this.setState({
@@ -110,7 +120,8 @@ OTSubscriber.propTypes = {
   eventHandlers: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   streamProperties: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   containerStyle: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  subscribeToSelf: PropTypes.bool
+  subscribeToSelf: PropTypes.bool,
+  maximumStreams: PropTypes.number,
 };
 
 OTSubscriber.defaultProps = {
