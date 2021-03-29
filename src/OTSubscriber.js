@@ -65,11 +65,9 @@ export default class OTSubscriber extends Component {
     const { maximumStreams } = this.props;
 
     if(this.props.maximumStreams && this.state.streams.length + this.pendingSubscriptions + 1 > maximumStreams) {
-      console.log('maximum stream subscriptions reached')
       if(!this.props.shouldSubscribeToStream(stream)){
         return;
       }
-      console.log('shouldSubscribeToStream override')
     } 
     
     this.pendingSubscriptions++;
