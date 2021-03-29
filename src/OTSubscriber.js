@@ -64,13 +64,8 @@ export default class OTSubscriber extends Component {
 
     const {maximumStreams} = this.props;
 
-    console.log('maximumStreams: ', maximumStreams)
-    console.log('this.state.streams.length: ', this.state.streams.length)
-
-    console.log('this.pendingSubscriptions ', this.pendingSubscriptions)
-
     if(this.props.maximumStreams && this.state.streams.length + this.pendingSubscriptions + 1 > maximumStreams) {
-      console.log('MAX STREAMS REACHED')
+      console.log('maximum stream subscriptions reached')
     } else {
         this.pendingSubscriptions++;
         // Subscribe to streams. If subscribeToSelf is true, subscribe also to his own stream
@@ -81,7 +76,6 @@ export default class OTSubscriber extends Component {
             this.otrnEventHandler(error);
           } else {
             this.pendingSubscriptions--;
-            console.log('this.state.streams -a- ', this.state.streams)
             this.setState({
               streams: [...this.state.streams, stream.streamId],
             });
@@ -95,12 +89,12 @@ export default class OTSubscriber extends Component {
       if (error) {
         this.otrnEventHandler(error);
       } else {
-        console.log('this.state.streams ', this.state.streams)
         const indexOfStream = this.state.streams.indexOf(stream.streamId);
-        // with limit, may not be storing this!
+        
         if(indexOfStream === -1) {
           return;
         }
+        
         const newState = this.state.streams.slice();
         newState.splice(indexOfStream, 1);
         this.setState({
