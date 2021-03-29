@@ -62,26 +62,27 @@ export default class OTSubscriber extends Component {
     const subscriberProperties = isNull(streamProperties[stream.streamId]) ?
                                   sanitizeProperties(properties) : sanitizeProperties(streamProperties[stream.streamId]);
 
-    const {maximumStreams} = this.props;
+    const { maximumStreams } = this.props;
 
     if(this.props.maximumStreams && this.state.streams.length + this.pendingSubscriptions + 1 > maximumStreams) {
       console.log('maximum stream subscriptions reached')
-    } else {
-        this.pendingSubscriptions++;
-        // Subscribe to streams. If subscribeToSelf is true, subscribe also to his own stream
-        const sessionInfoConnectionId = sessionInfo && sessionInfo.connection ? sessionInfo.connection.connectionId : null;
-        if (subscribeToSelf || (sessionInfoConnectionId !== stream.connectionId)){
-        OT.subscribeToStream(stream.streamId, sessionId, subscriberProperties, (error) => {
-          if (error) {
-            this.otrnEventHandler(error);
-          } else {
-            this.pendingSubscriptions--;
-            this.setState({
-              streams: [...this.state.streams, stream.streamId],
-            });
-          }
+      return;
+    } 
+    
+    this.pendingSubscriptions++;
+    // Subscribe to streams. If subscribeToSelf is true, subscribe also to his own stream
+    const sessionInfoConnectionId = sessionInfo && sessionInfo.connection ? sessionInfo.connection.connectionId : null;
+    if (subscribeToSelf || (sessionInfoConnectionId !== stream.connectionId)){
+    OT.subscribeToStream(stream.streamId, sessionId, subscriberProperties, (error) => {
+      if (error) {
+        this.otrnEventHandler(error);
+      } else {
+        this.pendingSubscriptions--;
+        this.setState({
+          streams: [...this.state.streams, stream.streamId],
         });
       }
+    });
     }
   }
   streamDestroyedHandler = (stream) => {
@@ -94,7 +95,7 @@ export default class OTSubscriber extends Component {
         if(indexOfStream === -1) {
           return;
         }
-        
+
         const newState = this.state.streams.slice();
         newState.splice(indexOfStream, 1);
         this.setState({
