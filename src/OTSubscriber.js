@@ -107,6 +107,20 @@ export default class OTSubscriber extends Component {
     const subscriberProperties = isNull(streamProperties[stream.streamId])
       ? sanitizeProperties(properties)
       : sanitizeProperties(streamProperties[stream.streamId]);
+
+    const { maximumStreams } = this.props;
+
+    if (
+      this.props.maximumStreams &&
+      this.state.streams.length + this.pendingSubscriptions + 1 > maximumStreams
+    ) {
+      if (!this.props.shouldSubscribeToStream(stream)) {
+        return;
+      }
+    }
+
+    this.pendingSubscriptions++;
+
     // Subscribe to streams. If subscribeToSelf is true, subscribe also to his own stream
     const sessionInfoConnectionId =
       sessionInfo && sessionInfo.connection
